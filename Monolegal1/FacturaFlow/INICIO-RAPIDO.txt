@@ -1,0 +1,55 @@
+FACTURAFLOW — INICIO RÁPIDO
+
+REQUISITO
+- Docker Desktop instalado y en ejecución.
+
+1. INICIAR TODO EL SISTEMA
+
+Abre PowerShell en la carpeta raíz de FacturaFlow, donde se encuentra docker-compose.yml, y ejecuta:
+
+docker compose up --build -d
+
+Comprueba que los servicios estén iniciados:
+
+docker compose ps
+
+2. DIRECCIONES
+
+Aplicación web:       http://localhost:4200
+API:                  http://localhost:5000
+Swagger:              http://localhost:5000/swagger
+Estado del backend:   http://localhost:5000/health
+Buzón de pruebas:     http://localhost:8025
+
+3. DATOS DE DEMOSTRACIÓN
+
+Si las seis facturas todavía no aparecen, ejecuta desde la carpeta raíz:
+
+Get-Content .\scripts\seed.js | docker compose exec -T mongodb mongosh "mongodb://localhost:27017/facturaflow"
+
+Si ya aparecen en el panel, no es necesario ejecutar este paso.
+
+4. PRUEBA DE RECORDATORIOS
+
+1. Abre http://localhost:8025.
+2. Procesa una factura elegible desde el panel o mediante la API.
+3. Comprueba el correo capturado en Mailpit y el cambio de estado de la factura.
+
+Mailpit captura los correos de prueba y no los entrega a clientes reales. Guarda capturas si necesitas conservar evidencia para la evaluación.
+
+5. DETENER EL SISTEMA
+
+Para detener los contenedores sin eliminar los datos de MongoDB:
+
+docker compose down
+
+Para volver a iniciar el sistema:
+
+docker compose up --build -d
+
+IMPORTANTE
+
+- MongoDB conserva sus datos en el volumen Docker `mongo_data`.
+- No ejecutes `docker compose down -v` si necesitas conservar los datos de la base de datos.
+- No publiques contraseñas ni credenciales reales.
+- No necesitas ejecutar manualmente el backend desde Visual Studio ni el frontend mediante npm para iniciar el sistema con Docker Compose.
