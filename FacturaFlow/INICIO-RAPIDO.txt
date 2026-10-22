@@ -1,8 +1,0 @@
-1. Instalar .NET 8 SDK, Node.js compatible y Docker Desktop.
-2. Desde esta carpeta: docker compose up -d
-3. Ejecutar: mongosh "mongodb://localhost:27017/facturaflow" --file scripts/seed.js
-4. Backend: abrir backend/FacturaFlow.Api/FacturaFlow.Api.csproj en Visual Studio y ejecutar F5.
-5. Frontend: abrir terminal en frontend y ejecutar npm install && npm start.
-6. Navegar a http://localhost:4200. API Swagger: http://localhost:5000/swagger. Buzón de pruebas: http://localhost:8025.
-7. Pruebas: cd backend/FacturaFlow.Tests && dotnet test
-Por defecto el correo está en modo simulado. Para capturar correos en Mailpit configura Email:DryRun=false, Host=localhost, Port=1025 y EnableSsl=false.
